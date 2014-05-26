@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Socket.IO Demo</title>
+</head>
+<body>
+	<div id="cars">
+		<ul id="car-list"></ul>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect('http://127.0.0.1:9000');
+		socket.on('car', function(data) {
+			var listItem = document.createElement('li');
+			var listText = document.createTextNode(data.make + ' - ' + data.price);
+			listItem.appendChild(listText);
+
+			var carList = document.getElementById('car-list');
+			carList.insertBefore(listItem, carList.firstChild);
+		});
+	</script>
+</body>
+</html>
